@@ -14,19 +14,23 @@ import { ServersService } from './servers/servers.service';
 import { RouterModule, Routes } from '@angular/router';
 import { NgTemplateOutlet } from '@angular/common';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { AppRoutingModules } from './app-routing.module';
+import { AuthGuard } from './auth-guard.service';
+import { AuthService } from './auth.service';
+import { CanDeactivateGuard } from './servers/edit-server/can-deactive-guard.service';
 
-const appRoutes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'users', component: UsersComponent, children: [
-    { path: ':id/:name', component: UserComponent},
-  ] },
-  { path: 'servers', component: ServersComponent, children: [
-    { path: ':id/edit', component: EditServerComponent },
-    { path: ':id', component: ServerComponent },
-  ]},
-  { path: 'not-found', component: PageNotFoundComponent },
-  { path: '**', redirectTo: 'not-found'},
-];
+// const appRoutes: Routes = [
+//   { path: '', component: HomeComponent },
+//   { path: 'users', component: UsersComponent, children: [
+//     { path: ':id/:name', component: UserComponent},
+//   ] },
+//   { path: 'servers', component: ServersComponent, children: [
+//     { path: ':id/edit', component: EditServerComponent },
+//     { path: ':id', component: ServerComponent },
+//   ]},
+//   { path: 'not-found', component: PageNotFoundComponent },
+//   { path: '**', redirectTo: 'not-found'},
+// ];
 
 
 @NgModule({
@@ -43,9 +47,9 @@ const appRoutes: Routes = [
   imports: [
     BrowserModule,
     FormsModule,
-    RouterModule.forRoot(appRoutes)
+    AppRoutingModules
   ],
-  providers: [ServersService, NgTemplateOutlet],
+  providers: [ServersService, NgTemplateOutlet, AuthGuard, AuthService, CanDeactivateGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
