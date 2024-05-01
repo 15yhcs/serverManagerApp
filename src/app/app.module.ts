@@ -18,7 +18,8 @@ import { AppRoutingModules } from './app-routing.module';
 import { AuthGuard } from './auth-guard.service';
 import { AuthService } from './auth.service';
 import { CanDeactivateGuard } from './servers/edit-server/can-deactive-guard.service';
-
+import { ErrorNotFoundComponent } from './error-not-found/error-not-found/error-not-found.component';
+import { ServerResolve } from './servers/server/server-resolver.service';
 // const appRoutes: Routes = [
 //   { path: '', component: HomeComponent },
 //   { path: 'users', component: UsersComponent, children: [
@@ -42,14 +43,15 @@ import { CanDeactivateGuard } from './servers/edit-server/can-deactive-guard.ser
     UserComponent,
     EditServerComponent,
     ServerComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    ErrorNotFoundComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModules
   ],
-  providers: [ServersService, NgTemplateOutlet, AuthGuard, AuthService, CanDeactivateGuard],
+  providers: [ServersService, NgTemplateOutlet, AuthGuard, AuthService, CanDeactivateGuard,ServerResolve],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
