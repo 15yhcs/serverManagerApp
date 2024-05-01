@@ -16,6 +16,16 @@
     <option value="offline">Offline</option>
   </select>
 </div>
-<button
-  class="btn btn-primary"
-  (click)="onUpdateServer()">Update Server</button>
+  
+<ng-container *ngIf="allowModification; else noModification">
+  <button
+    class="btn btn-primary"
+    (click)="onUpdateServer()">
+    Update Server
+  </button>
+</ng-container>
+  
+<ng-template #noModification>
+  <h4>You have no edit permission</h4>
+</ng-template>
+ 
